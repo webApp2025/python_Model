@@ -1,5 +1,5 @@
-from flask import Flask
-
+from flask import Flask ,request,json
+from facepplib import FacePP
 app = Flask(__name__)
 
 def face_comparing(app,url1,url2):
