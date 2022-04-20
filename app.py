@@ -13,7 +13,7 @@ def face_comparing(app,url1,url2):
   if cmp_.confidence > 80:
     return True
 
-@app.route('/in', methods = ['GET''POST'])
+@app.route('/in', methods = ['GET','POST'])
 def index():
     api_key ='incwWD-Q-ILQaZJoaGXZpoC6858HuzOP'
     api_secret ='X_c2GBme53nfsBjuOd90Tldg2j0g2wWc'
