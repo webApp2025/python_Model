@@ -20,25 +20,34 @@ def index1():
     app_=creatFacePP()
     data = request.get_json(True,True)
     image = app_.image.get(image_url = data['photo'])
-    if(len(image.faces)==0 or len(image.faces)>1):
-        a=False
-    else:
-        a=True
-    response = app.response_class(
-        response=json.dumps(a),
+    print(image.faces[0].age['value'])
+    if(len(image.faces) != 1):
+        response = app.response_class(
+        response=json.dumps(False),
         status=200,
-        mimetype='application/json')
-    return response
-
+        mimetype='application/json'
+        )
+        return response
+        
 @app.route('/search', methods = ['GET','POST'])
 def index():
     app_=creatFacePP()
     data = request.get_json(True,True)
+    image = app_.image.get(image_url = data[0]['photoSearch'])
+    if(len(image.faces) != 1):
+        response = app.response_class(
+        response=json.dumps(False),
+        status=200,
+        mimetype='application/json'
+        )
+        return response
     a=[]
-    for i in  range (1,len(data)):
+    m=len(data)
+    for i in  range (1,m):
         x=face_comparing(app_,data[0]['photoSearch'],data[i]['photo'])
         if(x==True):
             a.append(data[i])
+            break
             
     response = app.response_class(
         response=json.dumps(a),
