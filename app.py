@@ -20,10 +20,16 @@ def index1():
     app_=creatFacePP()
     data = request.get_json(True,True)
     image = app_.image.get(image_url = data['photo'])
-    print(image.faces[0].age['value'])
     if(len(image.faces) != 1):
         response = app.response_class(
         response=json.dumps(False),
+        status=200,
+        mimetype='application/json'
+        )
+        return response
+    else:
+        response = app.response_class(
+        response=json.dumps(True),
         status=200,
         mimetype='application/json'
         )
